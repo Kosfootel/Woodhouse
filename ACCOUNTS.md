@@ -1,63 +1,59 @@
 # ACCOUNTS.md - Mr. Ross's Account Inventory
 
-_Discovered 2026-03-17. Update as new accounts are confirmed or connected._
+_Last updated: 2026-03-17_
 
 ---
 
 ## 🍎 Apple / iCloud
 
-| Account | Status |
-|---|---|
-| erikdross@me.com | ✅ Active — signed into this Mac via iCloud |
-
-_Possibly 1-2 additional Apple IDs to identify (per Mr. Ross)_
-
----
-
-## 📧 Microsoft Accounts (in Outlook / M365)
-
-Discovered in Outlook "Main Profile" — 4 accounts configured:
-
-| Account | Type | Notes |
+| Account | Status | Notes |
 |---|---|---|
-| **Erik_Ross@hockeyops.ai** | M365 Exchange | ✅ **Default account** — HockeyOps.ai business |
-| **admin@hockeyops.ai** | M365 Exchange | HockeyOps.ai admin account |
-| **erikdross@outlook.com** | Personal Microsoft | Personal Outlook/Hotmail |
-| **ErikR@CleanSl8Inc.onmicrosoft.com** | M365 Exchange | CleanSl8 Inc. tenant |
+| **erikdross@me.com** | ✅ Active — PRIMARY | Signed into this Mac. Primary personal account. |
 
-_Also seen referenced: erik.ross@cdw.com (former employer / CDW), erik@hockeyops.ai_
+_Mr. Ross mentioned possibly 1–2 additional Apple IDs — to identify in due course._
 
 ---
 
-## 🔵 Google Accounts (Chrome Profiles)
+## 📧 Microsoft / M365 Accounts
 
-| Account | Chrome Profile | Notes |
+| Account | Type | Status | Notes |
+|---|---|---|---|
+| **Erik_Ross@hockeyops.ai** | M365 Exchange | ✅ Active | HockeyOps.ai business — **default Outlook account** |
+| **admin@hockeyops.ai** | M365 Exchange | ✅ Active | HockeyOps.ai admin account |
+| **ErikR@CleanSl8Inc.onmicrosoft.com** | M365 Exchange | ✅ Active | CleanSl8 Inc. — flagged by Woodhouse, noted by Mr. Ross |
+| erikdross@outlook.com | Personal MS | ❌ Decommissioned | Disregard |
+| erik.ross@cdw.com | Corporate (CDW) | ⚠️ Unknown | Former employer — likely dormant |
+| erik@hockeyops.ai | M365 alias? | ⚠️ Unknown | May be alias for Erik_Ross@hockeyops.ai |
+
+---
+
+## 🔵 Google Accounts
+
+| Account | Chrome Profile | Status | Notes |
+|---|---|---|---|
+| **kosfootel@gmail.com** | Profile 9 | ✅ Active | Personal Gmail |
+| erik_ross@stratascale.com | Profile 11 | 🗑️ Removed | Chrome profile deleted 2026-03-17 |
+| erik.ross@simple-hoa.com | Profile 12 | 🗑️ Removed | Chrome profile deleted 2026-03-17; Simple HOA content to be addressed |
+
+_Mr. Ross may have additional Google accounts — to confirm._
+
+---
+
+## 🔧 API Access Status
+
+| Service | Access | Next Step |
 |---|---|---|
-| kosfootel@gmail.com | Profile 9 | Personal Gmail |
-| erik_ross@stratascale.com | Profile 11 | Stratascale (former/current employer?) |
-| erik.ross@simple-hoa.com | Profile 12 | Simple HOA — separate project/business? |
-
-_Additional Google accounts may exist (per Mr. Ross: "a few Google accounts")_
-_Guest Profile also exists — unknown_
+| Microsoft Graph (M365) | ❌ Not yet | Set up Graph API — covers HockeyOps.ai email/calendar/contacts |
+| iCloud (erikdross@me.com) | ❌ Not yet | App-specific password or iCloud CLI |
+| Google (kosfootel@gmail.com) | ❌ Not yet | OAuth2 / Google API credentials |
 
 ---
 
-## 🔧 Access Status
+## 📋 Outstanding Items
 
-| Account | API Access | Notes |
-|---|---|---|
-| Microsoft (personal) | ❌ Not yet | Need: `az login` with erikdross@outlook.com |
-| HockeyOps.ai M365 | ❌ Not yet | Need: Microsoft Graph API or M365 CLI setup |
-| Google accounts | ❌ Not yet | Need: OAuth2 / Google API credentials |
-| iCloud | ❌ Not yet | Need: iCloud CLI or app-specific password |
-
----
-
-## 📋 To Clarify with Mr. Ross
-
-- Are there additional Apple IDs beyond erikdross@me.com?
-- Is CDW (erik.ross@cdw.com) still active / relevant?
-- What is CleanSl8 Inc.? (ErikR@CleanSl8Inc.onmicrosoft.com)
-- What is the Simple HOA project? (erik.ross@simple-hoa.com)
-- Which Google account is primary personal? (kosfootel@gmail.com?)
-- Priority order for connecting: Microsoft personal first, or HockeyOps.ai first?
+- [ ] Clarify what CleanSl8 Inc. is — still active, role?
+- [ ] Confirm if `erik@hockeyops.ai` is an alias or separate mailbox
+- [ ] Identify any additional Apple IDs
+- [ ] Confirm any additional Google accounts
+- [ ] Set up Microsoft Graph API access (priority — covers most M365 accounts)
+- [ ] Address remaining Simple HOA content/data if any local files exist
