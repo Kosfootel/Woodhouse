@@ -20,7 +20,7 @@ _Mr. Ross mentioned possibly 1–2 additional Apple IDs — to identify in due c
 |---|---|---|---|
 | **Erik_Ross@hockeyops.ai** | M365 Exchange | ✅ Active | HockeyOps.ai business — **default Outlook account** |
 | **admin@hockeyops.ai** | M365 Exchange | ✅ Active | HockeyOps.ai admin account |
-| **ErikR@CleanSl8Inc.onmicrosoft.com** | M365 Exchange | ✅ Active | CleanSl8 Inc. — flagged by Woodhouse, noted by Mr. Ross |
+| **ErikR@CleanSl8Inc.onmicrosoft.com** | M365 Exchange | ⏸️ Parked | CleanSl8 Inc. — tenant admin has locked external app access. Revisit when admin contact is available. |
 | erikdross@outlook.com | Personal MS | ❌ Decommissioned | Disregard |
 | erik.ross@cdw.com | Corporate (CDW) | ⚠️ Unknown | Former employer — likely dormant |
 | erik@hockeyops.ai | M365 alias? | ⚠️ Unknown | May be alias for Erik_Ross@hockeyops.ai |
@@ -51,7 +51,7 @@ _Mr. Ross may have additional Google accounts — to confirm._
 
 ## 📋 Outstanding Items
 
-- [ ] Clarify what CleanSl8 Inc. is — still active, role?
+- [ ] CleanSl8 — revisit when admin contact available (tenant blocks external app registration)
 - [ ] Confirm if `erik@hockeyops.ai` is an alias or separate mailbox
 - [ ] Identify any additional Apple IDs
 - [ ] Confirm any additional Google accounts
