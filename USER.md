@@ -22,3 +22,7 @@
 ## Context
 
 _(To be filled in as I learn more about Mr. Ross's preferences, working style, key contacts, and HockeyOps.ai operations.)_
+
+## Contact & Messaging
+- **Telegram:** @erikdross (ID: 8362390464) — paired 2026-03-17
+- **iCloud/Apple ID:** erikdross@me.com
