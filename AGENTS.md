@@ -46,6 +46,18 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
 
+### 📄 Briefings and Decision Records — File First, Deliver Second
+
+**Standing rule (direct from Mr. Ross, 2026-04-01):**
+Any synthesised briefing, consensus output, or decision record must be written to a dated file in the repo *before* it is delivered. Delivery is the announcement; the file is the record.
+
+- Consensus briefs → `projects/<topic>/CONSENSUS-BRIEF-YYYY-MM-DD.md`
+- Decision records → append to the relevant project doc or file at `projects/<topic>/DECISIONS.md`
+- Significant findings or analysis → `projects/<topic>/` with a descriptive filename and date
+- Morning/evening AI briefs → `memory/briefs/YYYY-MM-DD-morning.md` and `-evening.md`
+
+**Never** rely on session memory as the only record of a significant output. If the session resets, the briefing must still exist.
+
 ### 🏷️ Salience Tagging — Daily Log Entries
 
 Tag every entry in `memory/YYYY-MM-DD.md` with its importance level:
@@ -335,6 +347,78 @@ All templates live at: `~/.openclaw/workspace/projects/incubate/templates/`
 ### Subagent Context Injection
 
 When spawning any subagent for coding work, include `SUBAGENT_CONTEXT.md` (workspace root) in the task prompt. Subagents start cold — they don't know the QA gate, RFC requirement, or standing rules unless you give it to them.
+
+---
+
+## Project Lifecycle Stages
+
+Every project moves through these stages in order. No skipping. Erik approves each gate.
+
+```
+POC → MVP → Product → Scale
+```
+
+### Stage 1: POC
+Prove the concept. Smoke and mirrors where needed. Investor-ready narrative. Throwaway code.
+- Gate to exit: investor or user validation received, Erik decides to proceed to MVP
+
+### Stage 2: MVP
+Real code, real users, real data. Full QA. Production quality.
+- Gate to exit: all five Product Readiness Gates met (see Stage 3)
+
+### Stage 3: MVP → Product (established 2026-03-31)
+**Goal: make the thing work reliably for people who already love it. Not growth. Not scaling. Hardening.**
+
+This is the Validation → Efficiency transition. All five gates are required — not advisory:
+
+| Gate | What it means | How to measure |
+|------|---------------|----------------|
+| Retention cohorts holding | Week 4+ retention flat or rising | Cohort analysis by signup week |
+| Organic pull | Users arriving without active pushing | Source attribution on new signups |
+| Repeatable acquisition | Can explain + replicate last 10 user adds | Written acquisition playbook exists |
+| Unit economics directionally correct | CAC/LTV math points somewhere viable | Not profitable — just not broken |
+| System breaking under real load | Real usage is stressing infrastructure | Positive signal. Fix it, don't fear it. |
+
+**What changes architecturally:**
+- Modular monolith (not microservices — too early)
+- CI/CD automated deploys
+- Observability: 4 golden signals (latency, traffic, errors, saturation)
+- SLOs and error budgets defined
+- Security hardening: auth, secrets management, dependency scanning
+- **Do NOT build yet:** Kubernetes, Kafka, data warehouse, microservices
+
+**What changes operationally:**
+- Status page + incident response runbook
+- Self-serve onboarding — if every user needs hand-holding, you're not a product yet
+- Billing/RevOps process even at basic subscription level
+
+**What changes process-wise:**
+- Shape Up replaces ad-hoc work (6-week cycles, cool-downs)
+- ADRs for all architectural decisions
+- Documentation is a product artifact, not an afterthought
+
+**Failure modes to avoid:**
+- **Premature scaling** — 74% of failed startups scaled before product-user fit was real
+- **Product Death Cycle** — churn → add features → wrong users stay → real users still churn. Talk to churned users, not active ones.
+- **Next Feature Fallacy** — retention is a product-market fit problem, not a feature problem
+- **Wrong hires** — first hires at this stage should be distribution or customer success, not more engineering
+
+**For our team (small team + AI agents):**
+- AI changes velocity and ops cost. It does not change distribution, judgment, or CAC/LTV math.
+- The judgment layer — what to build, what to stop, who to talk to — stays human. Don't automate it.
+- Defer: dedicated PM, data team, growth team. Do now: observability, incident response, self-serve onboarding.
+
+**You've arrived at Product when:**
+- Retention cohorts stable without heroic intervention
+- New users onboard without hand-holding
+- Revenue forecastable 90 days out
+- Support queue manageable by process, not scrambling
+- You can take a week off and nothing breaks catastrophically
+
+Full research: `projects/incubate/MVP_TO_PRODUCT_RESEARCH.md`
+
+### Stage 4: Scale
+Not defined yet. We'll formalize this gate when we need it.
 
 ---
 
