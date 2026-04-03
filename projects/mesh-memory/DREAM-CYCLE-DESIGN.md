@@ -142,6 +142,18 @@ Produces `mesh-dream-YYYY-MM-DD.md` with sections:
 
 ---
 
+## Cron Schedule (staggered per concurrency protocol)
+
+Local staging crons (nightly):
+- **Woodhouse:** 2:00 AM EDT
+- **Ray:** 2:10 AM EDT
+- **Liz:** 2:20 AM EDT
+
+Mesh synthesis (Woodhouse only, weekly):
+- **Saturday 3:00 AM EDT** — pulls staging files from Ray + Liz, runs reconciliation, produces digest
+
+Rationale: 40-minute window between last local staging (Liz 2:20) and mesh synthesis (3:00) gives all nodes time to complete before Woodhouse pulls.
+
 ## Reconciliation Trigger
 
 **Schedule:** Weekly, Saturday 3:00 AM EDT (quiet window, post-reset)
