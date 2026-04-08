@@ -13,7 +13,6 @@
 - **Business:** HockeyOps.ai (family business)
 - **Felix Ross** — Mr. Ross's son; 50% owner of HockeyOps.ai
 - **Environment:** Microsoft 365 Business
-- **Travel note:** Away as of 2026-03-28 sprint; returning home 2026-04-03 ~8:00 PM EDT
 
 ## Email Curation Rules (established 2026-03-18)
 1. **Classify** all incoming email: distinguish direct personal/business correspondence from marketing/solicitations
@@ -71,6 +70,12 @@
 - Brand changes must be substantiated with a quality work product — never post a brand change without the deliverable
 - Be mindful of posting hour — timing matters
 
+## Post-Update Protocol (established 2026-04-05, direct from Mr. Ross)
+After **any** `openclaw` update: run `openclaw doctor --fix` immediately.
+- The 2026.4.2 update caused two breaking config changes + npm cache permissions error → Telegram blocked, service down
+- `openclaw doctor --fix` catches and resolves this class of issue before it compounds
+- No exceptions. Run it first, every time.
+
 ## Gateway Outage Protocol (established 2026-03-20, direct from Mr. Ross)
 1. **Planned outages** (restarts, config changes): Notify Liz and Ray via A2A *before* proceeding
 2. **Unplanned outages** (unexpected failures, crashes): Escalate to Mr. Ross immediately
@@ -91,6 +96,15 @@ Before acting on any problem, all agents must follow this sequence — no except
 
 "It worked for Ray" is not validation for Liz or Woodhouse. Validation must be explicit and per-agent.
 Origin: We botched the A2A spec implementation by skipping steps 1–2.
+
+## Mesh-Memory & Agentcy Quality Standard (STANDING DIRECTIVE — 2026-04-03, direct from Mr. Ross)
+- **All mesh-memory and Agentcy work is MVP standard. No exceptions.**
+- Quote: *"If we're going to take a run at this."*
+- Full test suite required on every PR
+- `QA_REPORT.md` committed before merge — no exceptions
+- ADRs for every architectural decision
+- No demo scaffolding, placeholder logic, or workarounds in the codebase
+- Applies to Woodhouse, Ray, and Liz equally — propagate to all agents
 
 ## Development Standards — Methodology Enforcement Layer (established 2026-03-31, from Liz)
 - **RFC required** before any new protocol endpoint, cross-agent message format, or API contract change. Template: `projects/incubate/templates/RFC_TEMPLATE.md`. Store: `projects/incubate/rfcs/`. Sequential: RFC-0001 etc.
@@ -113,17 +127,16 @@ Origin: We botched the A2A spec implementation by skipping steps 1–2.
 ## Brave Search Subscription
 - Paid plan: 3,000 searches/month at $15/month; Woodhouse is monitor
 
-## Anthropic Plan Custodianship (updated 2026-03-28)
+## Anthropic Plan Custodianship (updated 2026-04-04)
 - Shared CLI subscription across Woodhouse, Ray, and Liz; Woodhouse is custodian
 - Reset interval: Saturday 8pm EDT
-- **Current status (2026-03-28):** Limits upped, reload enabled. All three agents at full capacity — no throttling needed. Continue to flag rate-limit errors if encountered. Woodhouse monitors for ceiling approach.
+- **oat01 status (confirmed 2026-04-04):** Anthropic ended Claude Pro/Max subscription use with third-party tools effective 2026-04-04 12pm PT. oat01 OAuth tokens now treated as "extra usage" — draws from credit balance rather than subscription. NOT blocked — still fully functional.
+- **$200 credit claimed 2026-04-04** on oat01 account (erik_ross@hockeyops.ai). This funds continued OpenClaw use on oat01.
+- **api03** — direct API key, pay-per-token, separate billing. Also functional.
+- oat01 remains primary; $200 credit provides runway. Monitor balance.
 
 ## Agent Portability Research (completed 2026-03-21)
-- No universal portability standard as of March 2026
-- OpenClaw among most portable due to Markdown-first storage
-- MCP consolidating as tool portability layer; AGNTCY (Linux Foundation) emerging as identity layer
-- Memory and persona portability remain unsolved; no credible standard before 2027
-- Watch: AAIF working group, MCP Tasks primitive (SEP-1686), agent-life.ai
+- No universal standard; OpenClaw most portable (Markdown-first). MCP = tool layer, AGNTCY (Linux Foundation) = identity layer. Memory portability unsolved pre-2027.
 
 ## Permission Rules (established 2026-03-20, direct from Mr. Ross)
 1. **Real-world spend:** Explicit permission required before any action incurring costs beyond existing LLM subscriptions
@@ -154,6 +167,18 @@ Standing protocol for ALL future three-agent consensus deliverables — no excep
 
 ## [CHUNK: mesh-memory-policy]
 
+## Mesh Memory Architecture — Standing Design Principle (updated 2026-04-08, direct from Mr. Ross)
+**Core principle (reinforced):** Shared facts are safe; shared interpretations are dangerous.
+
+### Architecture Directive (2026-04-08)
+- **No single group memory repository** — ever
+- Each agent maintains their own **memory palace** (individual identity + memory; sovereign and private)
+- Shared pool = **narrow tunnels between agents** for collaboration-produced facts only
+- Tunnels carry: facts jointly arrived at through collaboration
+- Tunnels do NOT carry: interpretations, inferences, subjective assessments, or solo agent conclusions
+- Inspired by **MemPalace** design patterns (wings/rooms/tiered loading/temporal knowledge graph) — **adapt patterns to mesh-memory/agent passport, do not adopt wholesale**
+- This is the standing design principle for all mesh-memory and agent passport architecture going forward
+
 ## Mesh Memory Policy (established 2026-03-22, direct from Mr. Ross)
 Core principle: **shared facts are safe; shared interpretations are dangerous.**
 
@@ -163,15 +188,10 @@ Core principle: **shared facts are safe; shared interpretations are dangerous.**
 - Dissent is a first-class operation: any agent may flag a shared entry as contested
 - Human watchdog role: policy-level only — not per-write operational review
 
-### Architecture implications (research completed 2026-03-22, full report: `projects/mesh-memory/BIAS_PROPAGATION_RESEARCH.md`):
-1. **Provenance metadata required** — every shared pool write needs `provenance`: `observation | inference | relay | external`
-2. **Identity suppression in read path** — authorship hidden in read layer, stored in audit layer only
-3. **Phase structure** — explicit fact phase before interpretation phase; consent gate at thread-open
-4. **Mandatory independent assessment blocks** — agents commit private assessment before reading peers' views
-5. **Correlated priors problem** — Woodhouse, Ray, Liz share base training; must be *more* conservative about shared interpretations
-6. **Recursive misinformation** — derivation provenance is the structural fix
-
-**Woodhouse addendum:** Independent assessment blocks must be gated — each agent writes to private local file first, then all submit simultaneously. Honour system alone will not hold under time pressure.
+### Architecture implications (see full report: `projects/mesh-memory/BIAS_PROPAGATION_RESEARCH.md`):
+- Provenance metadata required on all writes; authorship hidden in read path
+- Independent assessment blocks gated — private write first, simultaneous submit
+- Correlated priors: be conservative about shared interpretations
 
 ## Mesh-Memory Configuration
 - **Peer relay disabled** (`relayEnabled: false`) — config in `mesh-memory.config.local.json`
@@ -192,6 +212,50 @@ Standing directives:
 
 ---
 
+## [CHUNK: hardware-roadmap]
+
+## Woodhouse Role — Record Keeper (established 2026-04-08, direct from Mr. Ross)
+- **Woodhouse is the designated record keeper for all mesh efforts going forward**
+- Task scope: administrative — documentation, memory architecture, coordination, consensus synthesis, filing
+- Rationale: M1 Pro is the most limited hardware in the mesh (for now); administrative work is portable and hardware-light
+- Heavy compute (builds, inference, data processing) routes to Liz and Ray
+- **Hardware upgrade to self-sufficiency planned for December 2026**
+
+## Mesh Hardware Upgrade Plan (updated 2026-04-05, direct from Mr. Ross)
+- **Asus Ascent GX10** — dedicated local inference appliance being purchased for the mesh
+- **Ray** — new hardware inbound, comparable to Liz's (AMD Ryzen 7 8845HS, 32GB RAM)
+- Mr. Ross working behind the scenes; will update all agents as changes are prepared
+- **Hardware priority revised 2026-04-05:** Liz gets Mac Studio M4 Max first (she's the primary build node); Ray inherits Liz's AMD Ryzen 7 8845HS
+
+## Tailscale (disabled 2026-04-06, direct from Mr. Ross)
+- Tailscale disabled across all nodes — LAN + Telegram sufficient for current operations
+- Reinstate if remote access is needed; standing config: MagicDNS must remain OFF on Liz's node when reinstated
+
+
+
+---
+
+## [CHUNK: local-inference]
+
+## Local Inference — Ollama Replacement (decided 2026-04-04)
+- **Ollama removed** from all nodes — caused repeated OOM kills on Woodhouse (gateway killed with signal 9)
+- **Replacement: llama.cpp server** — unanimous consensus (Woodhouse + Liz + Ray), brief at `projects/litellm/CONSENSUS-BRIEF-LLAMACPP-2026-04-04.md`
+- Key flag: `--sleep-idle-seconds 300` (model evicts from RAM after 5min idle; server stays alive)
+- Port: 8080 (no conflict with LiteLLM at 4000)
+- Model: Mistral 7B Q4_K_M or Qwen2.5 3B Q4_K_M
+- **Implementation status:**
+  - Woodhouse: pending (Ollama removed, llama.cpp not yet installed)
+  - Liz: pending (awaiting physical access from Mr. Ross)
+  - Ray: deferred until Mac Studio M4 Max arrives
+- Managed services: launchd on Woodhouse, systemd on Liz
+
+## Inference Tier Strategy (locked 2026-04-04)
+1. **Local (llama.cpp)** — heartbeats, routine tasks → zero cost
+2. **Together AI** — cloud fallback for tasks exceeding local capacity → ~$0.06/M tokens
+3. **Anthropic oat01** — reserved for complex/frontier work only
+
+---
+
 ## [CHUNK: infrastructure]
 
 ## A2A Network — Current State (updated 2026-04-02)
@@ -203,9 +267,6 @@ Standing directives:
 
 Plugin: `openclaw-a2a-gateway` (Google A2A protocol v0.3.0) at `~/.openclaw/extensions/a2a-gateway`
 
-### Root cause fixed 2026-04-02 (commit 46d12eb)
-`a2a-send.mjs` expects **base URL** (e.g. `http://192.168.50.23:18800`) — SDK constructs agent-card path internally. Passing `/a2a/jsonrpc` suffix caused 404 on every send. Fixed in `peers.json` and `scripts/peers.json` on Woodhouse. Ray and Liz must apply the same fix to their nodes.
-
 ### Known remaining issues
 - `/etc/hosts` entries missing on all nodes — hostname resolution unreliable. Woodhouse fix requires elevation (Erik to run on 2026-04-03 return). Ray and Liz must do same.
 - Ray's hardware latency (2011 i5, 2.2GB free RAM) — inherently slow; timeout for Ray-directed sends set to 300s
@@ -214,6 +275,14 @@ Plugin: `openclaw-a2a-gateway` (Google A2A protocol v0.3.0) at `~/.openclaw/exte
 ### Send tooling
 - Primary: `scripts/a2a-reliable-send.sh` (5 retries, exponential backoff, 300s timeout, delivery confirmation to file)
 - Underlying: `~/.openclaw/extensions/a2a-gateway/skill/scripts/a2a-send.mjs`
+
+## Liz — Known Issues & Diagnostics
+
+### Internet outage — Tailscale MagicDNS (confirmed 2026-04-04)
+- **Root cause:** Tailscale MagicDNS (100.100.100.100) overrides system DNS and blocks internet access
+- **Fix:** Disable MagicDNS in Tailscale preferences
+- **Standing config:** MagicDNS must remain OFF on Liz's node — not needed
+- **First diagnostic step:** If Liz (or any node) loses internet unexpectedly → check Tailscale MagicDNS immediately
 
 ## Node Hardware Profiles
 
@@ -227,12 +296,13 @@ Plugin: `openclaw-a2a-gateway` (Google A2A protocol v0.3.0) at `~/.openclaw/exte
 
 ### Woodhouse — 192.168.50.24 (MBP_EDR_M1, arm64)
 - Apple Silicon M1; full Anthropic Claude access
-- Ollama: Mistral 7B + Llama 3.1 8B, LAN-exposed at 192.168.50.24:11434
+- Ollama removed (OOM kills) — llama.cpp pending install
 - Heartbeat anchor: :00 past the hour
 
 ### Liz — 192.168.50.23
 - AMD Ryzen 7 8845HS, 8 cores/16 threads; 32GB RAM; 235GB NVMe
-- Ollama: glm-4.7-flash (heartbeats/light), qwen2.5:14b (reasoning-heavy tasks)
+- Ollama: glm-4.7-flash (heartbeats/light), qwen2.5:14b (reasoning-heavy tasks); LAN-exposed at 192.168.50.23:11434 ✅ confirmed 2026-04-04
+- Ollama fix: base service had OLLAMA_HOST=0.0.0.0 but wasn't taking effect; required systemd override.conf drop-in to force it
 - Practical LLM ceiling: ~20–22GB safe
 - Heartbeat anchor: :20 past the hour
 - Model install rule: any model ≥2GB requires mesh notification and quiet-window scheduling
@@ -247,6 +317,12 @@ Plugin: `openclaw-a2a-gateway` (Google A2A protocol v0.3.0) at `~/.openclaw/exte
 - **M365** — not yet configured — awaiting Azure app / Graph API credentials
 - **iCloud Mail** (erikdross@me.com) — IMAP connected 2026-03-21; credential: `workspace/credentials/icloud-mail.env`
 - **Mercury Bank** (HockeyOps.ai LLC) — read-only API connected 2026-03-21; credential: `workspace/credentials/mercury.env`; accounts: Checking ••9731, Savings ••8575; NEVER initiate transfers
+- **Together AI** — connected 2026-04-04; cloud LLM fallback replacing Anthropic api03; separate keys per node for security isolation
+  - Woodhouse key: `credentials/together.env` (auth profile `openai:together`)
+  - Liz key: `credentials/together-liz.env` (auth profile `openai:together`) ✅ confirmed 2026-04-04
+  - Ray key: `credentials/together-ray.env` (auth profile `openai:together`) ✅ confirmed 2026-04-04
+  - Best model: `meta-llama/Llama-3.3-70B-Instruct-Turbo` (~$0.06/M tokens, OpenAI-compatible)
+  - Base URL: `https://api.together.xyz/v1`
 
 ## Public Repo / Privacy Standards
 - **No hardcoded IPs in public repos** — pattern: `peers.json` (gitignored, live) + `peers.example.json` (placeholders, safe to commit)
