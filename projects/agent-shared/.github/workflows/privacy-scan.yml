@@ -1,0 +1,46 @@
+name: Privacy Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday
+
+jobs:
+  privacy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Scan for sensitive data
+        run: |
+          # Check for common patterns
+          ERRORS=0
+          
+          # IP addresses
+          if grep -rE "192\.168\.[0-9]+\.[0-9]+" --include="*.json" --include="*.js" --include="*.ts" --include="*.yml" --include="*.yaml" .; then
+            echo "::error::Found private IP addresses"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # API keys
+          if grep -rE "sk-[a-zA-Z0-9]{20,}" --include="*.json" --include="*.js" --include="*.ts" .; then
+            echo "::error::Found potential API keys"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # File paths with usernames
+          if grep -rE "/home/[a-z]+" --include="*.json" --include="*.js" --include="*.ts" --include="*.md" .; then
+            echo "::error::Found absolute file paths"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          if [ $ERRORS -gt 0 ]; then
+            exit 1
+          fi
+          
+          echo "Privacy scan passed"

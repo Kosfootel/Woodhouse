@@ -1,0 +1,40 @@
+name: Sync Shared Content
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'standards/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SYNC_TOKEN }}
+      
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Sync to agent-woodhouse
+        run: |
+          gh repo sync Kosfootel/agent-woodhouse --branch main || echo "Sync failed for agent-woodhouse"
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+      
+      - name: Sync to agent-ray
+        run: |
+          gh repo sync Kosfootel/agent-ray --branch main || echo "Sync failed for agent-ray"
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+      
+      - name: Sync to agent-liz
+        run: |
+          gh repo sync Kosfootel/agent-liz --branch main || echo "Sync failed for agent-liz"
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}

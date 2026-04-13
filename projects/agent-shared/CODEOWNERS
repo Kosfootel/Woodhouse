@@ -1,0 +1,13 @@
+# Repository Maintainers
+
+# Global ownership - Erik Ross has final say on all changes
+* @Kosfootel
+
+# Standards directory - requires careful review
+/standards/ @Kosfootel
+
+# GitHub Actions - infrastructure changes
+/.github/ @Kosfootel
+
+# Agent-specific configurations
+/agents/ @Kosfootel
