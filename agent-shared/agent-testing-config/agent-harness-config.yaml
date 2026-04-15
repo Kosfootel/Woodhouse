@@ -1,0 +1,31 @@
+# Agent Harness Configuration for GX-10
+models:
+  - name: nemotron-super-120b
+    provider: litellm
+    model: gx10/nemotron-super-120b:local
+    base_url: http://192.168.50.30:8080/v1
+    api_key: gx10-local
+    parameters:
+      temperature: 0.7
+      max_tokens: 4096
+      n_ctx: 128000
+      n_batch: 512
+  
+  - name: nemotron-nano-4b
+    provider: litellm
+    model: gx10/nemotron-nano-4b:local
+    base_url: http://192.168.50.30:8081/v1
+    api_key: gx10-local
+    parameters:
+      temperature: 0.7
+      max_tokens: 2048
+      n_ctx: 128000
+      n_batch: 256
+
+  - name: nomic-embed
+    provider: litellm
+    model: gx10/nomic-embed:local
+    base_url: http://192.168.50.30:8082/v1
+    api_key: gx10-local
+    parameters:
+      encoding_format: float

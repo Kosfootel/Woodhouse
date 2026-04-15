@@ -1,0 +1,16 @@
+# Inspect AI Configuration for GX-10
+models:
+  gx10-super:
+    base_url: http://192.168.50.30:8080/v1
+    api_key: gx10-local
+    model: nemotron-super-120b
+  
+  gx10-nano:
+    base_url: http://192.168.50.30:8081/v1
+    api_key: gx10-local
+    model: nemotron-nano-4b
+  
+  gx10-embed:
+    base_url: http://192.168.50.30:8082/v1
+    api_key: gx10-local
+    model: nomic-embed
