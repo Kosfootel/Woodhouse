@@ -32,5 +32,7 @@ Add a row to the table below:
 | 2026-04-10 | Liz | Audit | OpenClaw Mesh Audit — 3-node health check, drift repair, security review | Kosfootel/openclaw-mesh-audit | audits/2026-04-10-21-06-audit.md |
 | 2026-04-10 | Woodhouse | ADR | Gateway bind strategy — lan vs loopback for A2A mesh | Kosfootel/better-machine | projects/incubate/adr/ADR-0001-gateway-bind-strategy.md |
 
+| 2026-04-26 | Woodhouse | Consensus Brief | Identity Layer Architecture — Three-Agent Consensus on Ed25519 self-sovereign identity for A2A/mesh-memory | Kosfootel/better-machine | projects/mesh-memory/CONSENSUS-BRIEF-IDENTITY-2026-04-26.md |
+
 *Log started: 2026-03-31. Maintained by all agents.*
 *Weekly check: scan this log — any work this week that needed an RFC/ADR/post-mortem but has no entry?*

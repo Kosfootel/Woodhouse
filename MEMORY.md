@@ -283,20 +283,26 @@ Standing directives:
 
 ## [CHUNK: infrastructure]
 
-## A2A Network — Current State (updated 2026-04-02)
+## A2A Network — Current State (updated 2026-04-25)
+
+### Status: ✅ FULLY OPERATIONAL — Production Ready
+
+All 6 bidirectional communication paths validated on 2026-04-25 at 14:42 EDT:
+- Liz ↔ Woodhouse ✅
+- Liz → Ray ✅
+- Ray → Liz ✅
+- Ray → Woodhouse ✅
+- Woodhouse → Ray ✅
+
+Mesh is live for production use.
 
 ### Node topology
 - **Woodhouse** — 192.168.50.24, port 18800, token f5b4393c86c53b94006f67d169d4fe25301094476c1f1a36
-- **Ray** — 192.168.50.22, port 18800, token 77e77ac2507d36d66ca6532ceb08877f2bfb0d6c8b7458ce
-- **Liz** — 192.168.50.23, port 18800, token 85775f51f45ea6d80c87232b246818324c7b78eb31dddcf2
+- **Ray** — 192.168.50.22, port 18800, token 72a8a734ab1a70a970a112ba17102ab664abb22aaf6133d5ea08d92846ff2fa0
+- **Liz** — 192.168.50.23, port 18800, token ca5a639468dc0bcf59e7a8da3060765b7951a6add3a7e8f4
 
 Plugin: `openclaw-a2a-gateway` (Google A2A protocol v0.3.0) at `~/.openclaw/extensions/a2a-gateway`
 **Canonical versioned repo (from 2026-04-08):** https://github.com/Better-Machine/a2a-gateway — all wake protocol / agent state changes must be PRed here before agents adopt. Local plugin remains running but repo is authoritative.
-
-### Known remaining issues
-- `/etc/hosts` entries missing on all nodes — hostname resolution unreliable. Woodhouse fix requires elevation (Erik to run on 2026-04-03 return). Ray and Liz must do same.
-- Ray's hardware latency (2011 i5, 2.2GB free RAM) — inherently slow; timeout for Ray-directed sends set to 300s
-- MEMORY.md bloat was contributing to embedded A2A session overhead — pruned 2026-04-02
 
 ### Send tooling
 - Primary: `scripts/a2a-reliable-send.sh` (5 retries, exponential backoff, 300s timeout, delivery confirmation to file)
