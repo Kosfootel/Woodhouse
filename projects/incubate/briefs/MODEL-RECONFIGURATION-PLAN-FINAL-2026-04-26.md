@@ -71,9 +71,9 @@ This plan establishes a unified model configuration across the mesh following GX
 |------|---------|----------|--------|--------|-------|
 | **1** | `kimi-k2.5` | `gpt-oss:120b-cloud` | 🇺🇸 US | ❌ No | **Mr. Ross approval required** |
 | **2** | (unassigned) | `devstral-small-2:24b-cloud` | 🇫🇷🇺🇸 EU/US | ❌ No | Coding specialist |
-| **3** | (unassigned) | **DECISION NEEDED** | — | — | Options: leave open OR `gemma-4:27b-it-qat` for vision |
+| **3** | (unassigned) | `gemma-4:27b-it-cloud` | 🇺🇸 US | ✅ Yes | Vision + multimodal (approved by Mr. Ross) |
 
-**Key Trade-off:** gpt-oss loses vision capability (analyzing photos, OCR). If vision is critical, Slot 3 must be Gemma 4 27B.
+**Key Trade-off:** gpt-oss loses vision capability (analyzing photos, OCR). **Mitigation:** Gemma 4 in Slot 3 provides vision + multimodal coverage.
 
 ### 2.2 Local/GX-10 Assignments
 
